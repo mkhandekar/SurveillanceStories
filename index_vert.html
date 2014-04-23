@@ -1,0 +1,90 @@
+<html>
+<head>
+  <title>Surveillance Stories</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+  <style type="text/css">
+    body {margin:1em;padding:0;font-family:'Helvetica Neue'; font-size:100%;line-height:150%;width:100%;}
+    div#main {text-align:center;}
+    div#header {height:10px;top:0px;
+      margin-left:auto;margin-right:auto; 
+      width:100%;      
+      background:ccc;position:fixed;
+      z-index: 1;
+    }
+    div#highlight {
+      //display:none;  /* why doesn't this work?? */
+      z-index: 55;
+      position:absolute;  /*can i position this relative (close to) where the cursor is? i guess that would make it a tooltip*/
+      margin-left:20px;
+      height:auto;
+      width:200px;
+      top:200px;
+      background:ffc;
+    }
+
+
+    div#narrative {margin-top:120px;margin-left:30px;margin-right:50px;text-align:left;}
+    div#timeline {top:120px;bottom:30px;position:fixed;background:black;width:10px;}
+    div#cursor {top:120px;position:fixed;background:red;height:30px;width:10px;}  
+    div#cursor:hover {background:ffc;}
+
+
+
+    span.annotation {display:none;font-size:10pt;color:#888;width:100%;}
+
+    span.identity {background:#ffc;}
+    span.identity:hover {background:#eeb;}
+
+    span.behavior {background:#fcc;}
+    span.behavior:hover {background:#ebb;}      
+
+  </style>
+
+  <script>
+    $(document).ready(
+      function(){
+      $(".statement").click(function(e){  // filter , click listeners .. go get everything that is class .statement (which is really filter)  when it is clicked, call function (e) which is event == which can have mouse position ,et c  
+      var offset = $(this).attr('offset');  // when clicked on it loads offset which has % value
+      var kid = $(this).children('span.annotation');  
+      kid.css({display: 'block'});
+      
+      $("div#highlight").html(kid);
+      var offset = $(this).attr('offset');
+      
+      $("div#cursor").css({top: offset});   // this is the offset that moves the cursor along the timeline
+      
+    });
+    });
+
+  </script>
+</head>
+<body>
+  <div id="main">
+    <div id="header">
+      <div id="left-column"></div>
+      <div id="right-column"></div>
+    </div>
+    <div id="timeline">
+      <div id="cursor"></div>    
+    </div>
+    <div id="highlight">    
+    </div>
+
+
+
+    <div id="narrative">
+      <p>I saw what was happening, <span class="statement identity" offset="30%">but I didn’t know how to feel. Richard was breaking the law and risking his job for this girl.<span class="annotation"><span class="anno-left">"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
+       <span class="anno-right"> Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</span></span></span> He used his authority to access private information, to learn about John, to justify fears, and to contact me at my home, the only private places I had left. I wa there in the strings, just waiting to be pulled: Victim, Nicole Jones, Single, White, Female, Born 1983, Living, Austin, Texas.</p>
+
+     <p>I put Richard’s <span class="statement behavior" offset="50%">business card in my pocket and thought about national security<span class="annotation"><span class="anno-left">"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
+       <span class="anno-right"> Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</span></span></span>. Was it okay for him to be here, as a government employee, asking me for a favor? Was I even surprised? Would he threaten to kill me if I talked about it, the way John had?</p>
+
+     <p>I didn’t know what to do or what the right thing was. This was all happening in the gray areas between victim, criminal, government, and network. A man with a lot of power and responsibility was at my door, pleading for help. He seemed genuinely kind and concerned. He asked me to tell a story that I alone could tell. I never really had that chance before. I was too young to testify during the trial. The authorities were afraid it would be too painful for me, and I’m sure they were right.</p>
+   </div>
+ </div>
+</body>
+</html>
+
