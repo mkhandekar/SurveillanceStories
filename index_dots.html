@@ -66,6 +66,15 @@
       height:30px;
       width:10px;
     }  
+
+      div#dot {
+      position:absolute;
+      background:red;
+      height:10px;
+      width:10px;
+    }  
+
+
     div#scrubber:hover {
       background:ffc;
     }
@@ -121,6 +130,14 @@
       $("div#scrubber").css({top: offset});   // this is the offset that moves the scrubber along the timeline
       
     });
+
+      $(".statement")  // statement is the class (now its a collection of html)
+      var statements = $(".statement")     //fetch all statements
+      var secondstatement = statements[1]   // firststatement is the variable name is getting statement 1 which is the 2nd highlight
+      var secondrect = secondstatement.getBoundingClientRect() // 2nd statement is the 2nd highlight, calling a fucntion on that html element that returns the total size / distances of that hightlight  
+      secondrect.top  // heres the top of the highlight
+      $("div#dot").css({top: secondrect.top})  // statement is telling dot to move to the top of the 2ndrect  (have the same top value as second rect)
+
     });
 
   </script>
@@ -134,11 +151,7 @@
       <div id="right-column"></div>
       <div id="left-column"></div>
     </div>
-    <div id="white">
-    </div>
-    <div id="timeline">
-      <div id="scrubber"></div>    
-    </div>
+    <div id="dotcontainer"></div>
     <div id="highlight">    
     </div>
 
@@ -148,7 +161,7 @@
       <p>I saw what was happening, <span class="statement system" offset="20%">but I didn’t know how to feel. Richard was breaking the law and risking his job for this girl.<span class="annotation"><span class="anno-left">"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
        <span class="anno-right"> Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</span></span></span> He used his authority to access private information, to learn about John, to justify fears, and to contact me at my home, the only private places I had left. I wa there in the strings, just waiting to be pulled: Victim, Nicole Jones, Single, White, Female, Born 1983, Living, Austin, Texas.</p>
 
-       <p>I put Richard’s <span class="statement identity" offset="50%">business card in my pocket and thought about national security<span class="annotation"><span class="anno-left">"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
+       <p>I put Richard’s <span class="statement identity">business card in my pocket and thought about national security<span class="annotation"><span class="anno-left">"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
          <span class="anno-right"> Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat culpa qui officia deserunt mollit anim id est laborum."</span></span></span>. Was it okay for him to be here, as a government employee, asking me for a favor? Was I even surprised? Would he threaten to kill me if I talked about it, the way John had?</p>
 
          <p>I didn’t know what to do or what the right thing was. This was all happening in the gray areas between victim, criminal, government, and network. <span class="statement behavior" offset="90%">business card in my pocket and thought about national security<span class="annotation"><span class="anno-left">"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
