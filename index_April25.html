@@ -42,7 +42,6 @@
       margin-left:20px;
       height:auto;
       width:200px;
-      top:200px;
       background:ffc;
     }
 
@@ -62,6 +61,24 @@
     }  
 
     div.dot {   
+      background: black;
+      position:absolute;
+      border-radius: 50%;
+      height:10px;
+      width:10px;
+    } 
+
+      div.dot.system {   
+      background:#D97D80;
+    }   
+      div.dot.identity {   
+      background:#FAC466;
+    }   
+      div.dot.behavior {   
+      background:#50BEFF;
+    }   
+
+      div.dotblue {   
       position:absolute;
       background:red;
       height:10px;
@@ -79,16 +96,19 @@
       font-family:'Lato';
       font-weight: 400;
       color:#888;
-      width:100%;
+      text-align:left;
+      padding:1em;
+      margin:1em;
       line-height: 150%;
     }
+
+    span.annotation.system {background:blue; color:white;}
+
+    span.annotation span.headline {font-size:30;}
 
     /* FILTERS */
 
     span.system {
-      background:#D97D80;
-    }
-    span.system:hover {
       background:#D97D80;
     }
 
@@ -112,30 +132,65 @@
 
   <script>
     $(document).ready(
+
+
       function(){
-      $(".statement").click(function(e){  // filter , click listeners .. go get everything that is class .statement (which is really filter)  when it is clicked, call function (e) which is event == which can have mouse position ,et c  
+
+    
+       $('body').click(function(e) {
+        $('div#highlight').html("");
+      });
+
+      $(".statement").click(function(e){ 
+       // filter , click listeners .. go get everything that is class .statement (which is really filter)  when it is clicked, call function (e) which is event == which can have mouse position ,et c  
       var offset = $(this).attr('offset');  // when clicked on it loads offset which has % value
       var kid = $(this).children('span.annotation');  
-      kid.css({display: 'block'});   // html elements display, none, inline, block, block has most control using "position" absolute 
+      var newkid = kid.clone();
+      newkid.css({display: 'block'});   // html elements display, none, inline, block, block has most control using "position" absolute 
       
-      $("div#highlight").html(kid);
-      var offset = $(this).attr('offset');
+      $("div#highlight").html(newkid);
       
-      $("div#scrubber").css({top: offset});   // this is the offset that moves the scrubber along the timeline
+      var rect = this.getBoundingClientRect() // this means: refers to the context of the variable it is executing 
+
+      $("div#highlight").css({
+        
+        top: rect.top+window.scrollY-50
+
+      });
+
+
+      e.stopPropagation();
       
     });
 
-      $(".statement")  // statement is the class (now its a collection of html)
-      var statements = $(".statement")     //fetch all statements
-      for (var i = 0; i < statements.length; i++) { // i is 0, immediately check the conditions,  
-        var statement = statements[i]   // firststatement is the variable name is getting statement 1 which is the 2nd highlight
-        var rect = statement.getBoundingClientRect() // 2nd statement is the 2nd highlight, calling a fucntion on that html element that returns the total size / distances of that hightlight  
-        var dot = $('<div class="dot"></div>')  // create html elements (the dots)
-        $("div#dotcontainer").append(dot)  // select the container, append is a jquery function that inserts a dot visually
-        dot.css({top: rect.top})  // for the dot that we just created, set the top value
+      function drawDots() {  // 
+        $(".dot").remove();   // empty the canvas
+        var statements = $(".statement");     //fetch all statements
+
+        for (var i = 0; i < statements.length; i++) { // i is 0, immediately check the conditions,  
+          var statement = statements[i]   // firststatement is the variable name is getting statement 1 which is the 2nd highlight
+          var rect = statement.getBoundingClientRect() // 2nd statement is the 2nd highlight, calling a fucntion on that html element that returns the total size / distances of that hightlight  
+          if ($(statement).hasClass("system")){
+            className="system";
+          }
+          if ($(statement).hasClass("identity")){
+            className="identity";
+          }
+          if ($(statement).hasClass("behavior")){
+            className="behavior";
+          }
+          var dot = $('<div class="dot '+className+'"></div>')  // create html elements (the dots)
+          $("div#dotcontainer").append(dot)  // select the container, append is a jquery function that inserts a dot visually
+          dot.css({top: rect.top+window.scrollY})  // for the dot that we just created, set the top value
+        }
       }
+      drawDots();   // excuted once on load 
+      $( window ).resize(drawDots);   // if window is resized, escuted the functiont hat is draw dots
+
 
     });
+
+
 
 </script>
 
@@ -145,8 +200,8 @@
 <body>
   <div id="main">
     <div id="header">
-      <div id="right-column"></div>
-      <div id="left-column"></div>
+      <div id="headline"></div>
+      <div id="body"></div>
     </div>
     <div id="dotcontainer"></div>
     <div id="highlight">    
@@ -155,10 +210,10 @@
 
 
     <div id="story">
-      <p>I saw what was happening, <span class="statement system" offset="20%">but I didn’t know how to feel. Richard was breaking the law and risking his job for this girl.<span class="annotation"><span class="anno-left">"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
+      <p>I saw what was happening, <span class="statement system">but I didn’t know how to feel. Richard was breaking the law and risking his job for this girl.<span class="annotation system"><span class="headline">"Lorem ipsum dolor sit amet,</span><br><span class="body">consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
        <span class="anno-right"> Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</span></span></span> He used his authority to access private information, to learn about John, to justify fears, and to contact me at my home, the only private places I had left. I wa there in the strings, just waiting to be pulled: Victim, Nicole Jones, Single, White, Female, Born 1983, Living, Austin, Texas.</p>
 
-       <p>I put Richard’s <span class="statement identity">business card in my pocket and thought about national security<span class="annotation"><span class="anno-left">"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
+       <p>I put Richard’s <span class="statement identity">business card in my pocket and thought about national security<span class="annotation">"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
          <span class="anno-right"> Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat culpa qui officia deserunt mollit anim id est laborum."</span></span></span>. Was it okay for him to be here, as a government employee, asking me for a favor? Was I even surprised? Would he threaten to kill me if I talked about it, the way John had?</p>
 
          <p>I didn’t know what to do or what the right thing was. This was all happening in the gray areas between victim, criminal, government, and network. <span class="statement behavior" offset="90%">business card in my pocket and thought about national security<span class="annotation"><span class="anno-left">"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>

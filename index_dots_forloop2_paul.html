@@ -79,10 +79,13 @@
       font-family:'Lato';
       font-weight: 400;
       color:#888;
-      width:100%;
+      text-align:left;
+      padding:1em;
+      margin:1em;
       line-height: 150%;
     }
 
+    span.annotation.system {background:blue; color:white;}
     /* FILTERS */
 
     span.system {
@@ -112,30 +115,50 @@
 
   <script>
     $(document).ready(
+
+
       function(){
-      $(".statement").click(function(e){  // filter , click listeners .. go get everything that is class .statement (which is really filter)  when it is clicked, call function (e) which is event == which can have mouse position ,et c  
+
+    
+       $('body').click(function(e) {
+        $('div#highlight').html("");
+      });
+
+      $(".statement").click(function(e){ 
+       // filter , click listeners .. go get everything that is class .statement (which is really filter)  when it is clicked, call function (e) which is event == which can have mouse position ,et c  
       var offset = $(this).attr('offset');  // when clicked on it loads offset which has % value
       var kid = $(this).children('span.annotation');  
-      kid.css({display: 'block'});   // html elements display, none, inline, block, block has most control using "position" absolute 
+      var newkid = kid.clone();
+      newkid.css({display: 'block'});   // html elements display, none, inline, block, block has most control using "position" absolute 
       
-      $("div#highlight").html(kid);
+      $("div#highlight").html(newkid);
       var offset = $(this).attr('offset');
       
       $("div#scrubber").css({top: offset});   // this is the offset that moves the scrubber along the timeline
+
+      e.stopPropagation();
       
     });
 
-      $(".statement")  // statement is the class (now its a collection of html)
-      var statements = $(".statement")     //fetch all statements
-      for (var i = 0; i < statements.length; i++) { // i is 0, immediately check the conditions,  
-        var statement = statements[i]   // firststatement is the variable name is getting statement 1 which is the 2nd highlight
-        var rect = statement.getBoundingClientRect() // 2nd statement is the 2nd highlight, calling a fucntion on that html element that returns the total size / distances of that hightlight  
-        var dot = $('<div class="dot"></div>')  // create html elements (the dots)
-        $("div#dotcontainer").append(dot)  // select the container, append is a jquery function that inserts a dot visually
-        dot.css({top: rect.top})  // for the dot that we just created, set the top value
+      function drawDots() {  // 
+        $(".dot").remove();   // empty the canvas
+        var statements = $(".statement");     //fetch all statements
+
+        for (var i = 0; i < statements.length; i++) { // i is 0, immediately check the conditions,  
+          var statement = statements[i]   // firststatement is the variable name is getting statement 1 which is the 2nd highlight
+          var rect = statement.getBoundingClientRect() // 2nd statement is the 2nd highlight, calling a fucntion on that html element that returns the total size / distances of that hightlight  
+          var dot = $('<div class="dot"></div>')  // create html elements (the dots)
+          $("div#dotcontainer").append(dot)  // select the container, append is a jquery function that inserts a dot visually
+          dot.css({top: rect.top})  // for the dot that we just created, set the top value
+        }
       }
+      drawDots();   // excuted once on load 
+      $( window ).resize(drawDots);   // if window is resized, escuted the functiont hat is draw dots
+
 
     });
+
+
 
 </script>
 
@@ -155,7 +178,7 @@
 
 
     <div id="story">
-      <p>I saw what was happening, <span class="statement system" offset="20%">but I didn’t know how to feel. Richard was breaking the law and risking his job for this girl.<span class="annotation"><span class="anno-left">"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
+      <p>I saw what was happening, <span class="statement system" offset="20%">but I didn’t know how to feel. Richard was breaking the law and risking his job for this girl.<span class="annotation system"><span class="anno-left">"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
        <span class="anno-right"> Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</span></span></span> He used his authority to access private information, to learn about John, to justify fears, and to contact me at my home, the only private places I had left. I wa there in the strings, just waiting to be pulled: Victim, Nicole Jones, Single, White, Female, Born 1983, Living, Austin, Texas.</p>
 
        <p>I put Richard’s <span class="statement identity">business card in my pocket and thought about national security<span class="annotation"><span class="anno-left">"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
