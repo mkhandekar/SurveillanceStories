@@ -43,8 +43,8 @@ body {
   color: #222222;
   padding: 0;
   margin: 0;
-  font-family: "Lato", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-  font-weight: 300;
+  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  font-weight: normal;
   font-style: normal;
   line-height: 1;
   position: relative;
@@ -1082,8 +1082,8 @@ button, .button {
   border-style: solid;
   border-width: 0px;
   cursor: pointer;
-  font-family: "Montserrat", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-  font-weight: 700;
+  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  font-weight: normal;
   line-height: normal;
   margin: 0 0 1.25rem;
   position: relative;
@@ -1097,7 +1097,7 @@ button, .button {
   padding-bottom: 1.0625rem;
   padding-left: 2rem;
   font-size: 1rem;
-  background-color: #50BEFF;
+  background-color: #008cba;
   border-color: #007095;
   color: white;
   transition: background-color 300ms ease-out; }
@@ -1941,29 +1941,6 @@ meta.foundation-mq-topbar {
   .panel.radius {
     border-radius: 3px; }
 
-  .panel.white {
-    border-style: solid;
-    border-width: 0px;
-    border-color: #ffffff;
-    margin-bottom: 1.25rem;
-    padding: 1.25rem;
-    background: #ffffff; }
-    .panel.callout > :first-child {
-      margin-top: 0; }
-    .panel.callout > :last-child {
-      margin-bottom: 0; }
-    .panel.callout h1, .panel.callout h2, .panel.callout h3, .panel.callout h4, .panel.callout h5, .panel.callout h6, .panel.callout p {
-      color: #333333; }
-    .panel.callout h1, .panel.callout h2, .panel.callout h3, .panel.callout h4, .panel.callout h5, .panel.callout h6 {
-      line-height: 1;
-      margin-bottom: 0.625rem; }
-      .panel.callout h1.subheader, .panel.callout h2.subheader, .panel.callout h3.subheader, .panel.callout h4.subheader, .panel.callout h5.subheader, .panel.callout h6.subheader {
-        line-height: 1.4; }
-    .panel.callout a:not(.button) {
-      color: #008cba; }
-  .panel.radius {
-    border-radius: 3px; }
-
 .dropdown.button, button.dropdown {
   position: relative;
   padding-right: 3.5625rem; }
@@ -2153,10 +2130,10 @@ div.switch {
   max-width: 100%;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
   transition: all 200ms ease-out; }
-  /*.th:hover, .th:focus {
-    box-shadow: 0 0 6px 1px rgba(0, 140, 186, 0.5); }*/
+  .th:hover, .th:focus {
+    box-shadow: 0 0 6px 1px rgba(0, 140, 186, 0.5); }
   .th.radius {
-    border-radius: 50%; }
+    border-radius: 3px; }
 
 /* Pricing Tables */
 .pricing-table {
@@ -2848,7 +2825,7 @@ p {
   font-family: inherit;
   font-weight: normal;
   font-size: 1rem;
-  line-height: 150%;
+  line-height: 1.6;
   margin-bottom: 1.25rem;
   text-rendering: optimizeLegibility; }
   p.lead {
@@ -2861,7 +2838,7 @@ p {
 
 /* Default header styles */
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Montserrat", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
   font-weight: normal;
   font-style: normal;
   color: #222222;
