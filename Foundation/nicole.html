@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+<html class="no-js" lang="en" >
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Surveillance Stories</title>
+
+  <!-- If you are using CSS version, only link these 2 files, you may add app.css to use for your overrides if you like. -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/foundation.css">
+
+  <!-- If you are using the gem version, you need this only -->
+  
+
+  <script src="js/vendor/modernizr.js"></script>
+
+  <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+  <script>
+
+    $(document).ready(
+
+      function(){
+
+       $('body').click(function(e) {
+        $('div#highlight').html("");
+      });
+
+       $(".statement").click(function(e){ 
+           // filter , click listeners .. go get everything that is class .statement (which is really filter)  when it is clicked, call function (e) which is event == which can have mouse position ,et c  
+          var offset = $(this).attr('offset');  // when clicked on it loads offset which has % value
+          var kid = $(this).children('span.annotation');  
+          var newkid = kid.clone();
+          newkid.css({display: 'block'});   // html elements display, none, inline, block, block has most control using "position" absolute 
+          
+          $("div#highlight").html(newkid);
+          
+          var rect = this.getBoundingClientRect() // this means: refers to the context of the variable it is executing 
+
+          $("div#highlight").css({
+
+            top: rect.top+window.scrollY-50
+
+          });
+
+          e.stopPropagation();
+          
+        });
+
+          function drawDots() {  // 
+            $(".dot").remove();   // empty the canvas
+            var statements = $(".statement");     //fetch all statements
+
+            for (var i = 0; i < statements.length; i++) { // i is 0, immediately check the conditions,  
+              var statement = statements[i]   // firststatement is the variable name is getting statement 1 which is the 2nd highlight
+              var rect = statement.getBoundingClientRect() // 2nd statement is the 2nd highlight, calling a fucntion on that html element that returns the total size / distances of that hightlight  
+              if ($(statement).hasClass("system")){
+                className="system";
+              }
+              if ($(statement).hasClass("identity")){
+                className="identity";
+              }
+              if ($(statement).hasClass("behavior")){
+                className="behavior";
+              }
+              var dot = $('<div class="dot '+className+'"></div>')  // create html elements (the dots)
+              $("div#dotcontainer").append(dot)  // select the container, append is a jquery function that inserts a dot visually
+              dot.css({
+
+                top: rect.top+window.scrollY-5
+
+              }); // is semi colon needed?
+            }
+          }
+          drawDots();   // excuted once on load 
+          $( window ).resize(drawDots);   // if window is resized, escuted the functiont hat is draw dots
+
+
+        });
+
+</script>
+
+</head>
+
+<body>
+
+  <!-- body content here -->
+
+  <div class="fixed">
+    <nav class="top-bar" data-topbar>
+      <ul class="title-area">
+        <li class="name">
+          <h1><a href="index.html">Surveillance Stories</a></h1>
+        </li>
+        <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+      </ul>
+
+      <section class="top-bar-section">
+        <!-- Right Nav Section -->
+        <ul class="right">
+          <li><a href="LearnAct.html">Act</a></li>
+          <li><a href="TellYourStory.html">Tell Your Story</a></li>
+      <!--<li class="active"><a href="#">Right Button Active</a></li>
+      <li class="has-dropdown">
+        <a href="#">Right Button Dropdown</a>
+        <ul class="dropdown">
+          <li><a href="#">First link in dropdown</a></li>
+        </ul>
+      </li>-->
+    </ul> 
+
+    <!-- Left Nav Section -->
+    <ul class="left">
+      <li><a href="index.html">Home</a></li>
+    </ul>
+  </section>
+
+</nav>
+
+<div class="row">
+  <div class="large-12 columns">
+    <div class="toptitle">
+      <h3>Story Title</h3>
+      and author
+      <span data-tooltip class="has-tip" title="the people, norms and laws in a system">System</span>&nbsp;&nbsp;<span data-tooltip class="has-tip" title="how the storyteller perceives themselves &amp; how the system perceives the storyteller">Identity</span>&nbsp;&nbsp;<span data-tooltip class="has-tip" title="ways of acting based on a set of values">Behavior</span>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<div class="row">
+
+  <div id="dotcontainer"></div>
+  <div id="highlight">    
+  </div>
+
+  <div id="story">
+    <p>
+      I saw what was happening,
+      <span class="statement system">but I didn’t know how to feel. Richard was breaking the law and risking his job for this girl.
+        <span class="annotation system">
+          <span class="headline">
+            Lorem ipsum dolor sit amet
+          </span>
+          <br><br>
+          <span class="body">
+            Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </span>
+        </span>
+      </span>
+      <p>
+        He used his authority to access private information, to learn about John, to justify fears, and to contact me at my home, the only private places I had left. I wa there in the strings, just waiting to be pulled: Victim, Nicole Jones, Single, White, Female, Born 1983, Living, Austin, Texas.
+      </p>
+
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ac mauris porta, luctus mi ac, pretium velit. 
+        <span class="statement identity">In hac habitasse platea dictumst.
+          <span class="annotation identity">
+            <span class="headline">
+              Lorem ipsum dolor sit amet
+            </span>
+            <br><br>
+            <span class="body">
+              Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </span>
+          </span>
+        </span>
+        Aenean ut magna mi. In magna eros, adipiscing quis interdum eu, tristique quis ipsum. In hac habitasse platea dictumst. Phasellus porttitor nisl quis ultricies convallis. Sed massa lacus, dignissim sit amet feugiat a, tincidunt eu odio. Duis adipiscing lacinia arcu, ac congue est tristique quis. Donec vehicula luctus placerat. Nulla tincidunt ligula felis, vitae mattis leo pretium sit amet. Phasellus consequat, sapien vitae faucibus ullamcorper, lorem leo accumsan libero, id volutpat lectus felis sit amet ligula. Morbi tempor lacus id massa vestibulum, ut condimentum dui luctus. Praesent adipiscing consequat elit id porttitor. Vivamus a velit ac odio gravida volutpat ut vitae ante.
+      </p>
+
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque varius pulvinar arcu sit amet sollicitudin. Etiam placerat est tristique diam pharetra accumsan a sed nisi.  
+        <span class="statement behavior">Etiam facilisis sed velit a tincidunt.
+          <span class="annotation behavior">
+            <span class="headline">
+              When there is a way
+            </span>
+            <br><br>
+            <span class="body">
+              Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </span>
+          </span>
+        </span>
+        Cras in sodales ipsum, dignissim viverra lacus. trud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.
+        <span class="statement system">Ut non malesuada sapien. Donec neque mi, rhoncus eget aliquam sed, posuere vel lectus.
+          <span class="annotation system">
+            <span class="headline">
+              Lorem ipsum dolor sit amet
+            </span>
+            <br><br>
+            <span class="body">
+              Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </span>
+          </span>
+        </span>
+      </p>
+
+      <p>
+        Phasellus purus leo, cursus eu quam sit amet, euismod aliquam purus. Etiam in augue ac turpis dapibus lacinia. Cras rhoncus a mi at ullamcorper. Integer gravida velit enim, at auctor lacus tristique ut. Cras ultrices tellus orci, ac pulvinar felis dictum a. Suspendisse lobortis velit ante, sit amet ultrices tortor rhoncus a. Vivamus dignissim neque massa, et imperdiet sem vehicula at. Donec lobortis placerat libero eget pharetra. Sed id imperdiet massa, eget tincidunt dolor.
+      </p>
+
+      <p>
+        Morbi diam nunc, sagittis sed fermentum lobortis, rutrum eu justo. Nam eu erat molestie, sodales lectus convallis, lobortis lorem. Vivamus ut felis rutrum, 
+        <span class="statement behavior">consequat velit sed, onsectetur adipisicing elit, sed do eiusmod tempor
+          <span class="annotation behavior">
+            <span class="headline">
+              Headline!
+            </span>
+            <br><br>
+            <span class="body">
+              C incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </span>
+          </span>
+        </span>tempor erat. onec non nisl ac massa euismod faucibus. Curabitur ac lorem elit. Proin pulvinar porttitor suscipit. Phasellus congue massa non dolor tempus vulputate. Etiam id massa orci.
+      </p>
+
+      <p>
+        Donec vehicula neque nunc, et fermentum arcu tincidunt eget. Sed et nunc nulla. Morbi porttitor justo sem, dictum sollicitudin dui aliquam vitae. Donec feugiat lectus at iaculis egestas. Suspendisse dictum quis nisi vel hendrerit.
+        <span class="statement identity">Nam ac velit nec velit faucibus ullamcorper sed nec ante. Curabitur sagittis odio non ipsum tincidunt sagittis. Donec consequat in lacus quis consequat.
+          <span class="annotation identity">
+            <span class="headline">
+              Headline Two Lines TwoLines
+            </span>
+            <br><br>
+            <span class="body">
+              Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </span>
+          </span>
+        </span>Integer eleifend leo id sapien commodo, quis fermentum quam egestas. Vivamus dolor lacus, luctus at libero ac, fringilla tempus metus. Donec eleifend blandit aliquet. Pellentesque tempus facilisis nisl, at cursus lacus adipiscing ut. Phasellus lorem risus, pharetra a eleifend ut, facilisis ac augue.
+      </p>
+
+    </div>
+
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+    </script>
+</div>
+
+  </body>
+  </html>
