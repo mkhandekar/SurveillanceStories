@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+<html class="no-js" lang="en" >
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Surveillance Stories</title>
+
+  <!-- If you are using CSS version, only link these 2 files, you may add app.css to use for your overrides if you like. -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/foundation.css">
+
+  <!-- If you are using the gem version, you need this only -->
+  
+
+  <script src="js/vendor/modernizr.js"></script>
+  <script src="js/vendor/jquery.js"></script>
+  
+  <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Alegreya+Sans:300,400,700,900,400italic,700italic,900italic,100italic,300italic' rel='stylesheet' type='text/css'>
+
+  <script>
+
+    $(document).ready(
+
+      function(){
+
+       $('body').click(function(e) {
+        $('div#annotationcontainer').html("");
+      });
+
+       $(".statement").click(function(e){ 
+           // filter , click listeners .. go get everything that is class .statement (which is really filter)  when it is clicked, call function (e) which is event == which can have mouse position ,et c  
+          var offset = $(this).attr('offset');  // when clicked on it loads offset which has % value
+          var kid = $(this).children('span.annotation');  
+          var newkid = kid.clone();
+          newkid.css({display: 'block'});   // html elements display, none, inline, block, block has most control using "position" absolute 
+          
+          $("div#annotationcontainer").html(newkid);
+          
+          var rect = this.getBoundingClientRect() // this means: refers to the context of the variable it is executing 
+
+          $("div#annotationcontainer").css({
+
+            top: rect.top+window.scrollY-50
+
+          });
+
+          e.stopPropagation();
+          
+        });
+
+          function drawDots() {  // 
+            $(".dot").remove();   // empty the canvas
+            var statements = $(".statement");     //fetch all statements
+
+            for (var i = 0; i < statements.length; i++) { // i is 0, immediately check the conditions,  
+              var statement = statements[i]   // firststatement is the variable name is getting statement 1 which is the 2nd highlight
+              var rect = statement.getBoundingClientRect() // 2nd statement is the 2nd highlight, calling a fucntion on that html element that returns the total size / distances of that hightlight  
+              if ($(statement).hasClass("system")){
+                className="system";
+              }
+              if ($(statement).hasClass("identity")){
+                className="identity";
+              }
+              if ($(statement).hasClass("behavior")){
+                className="behavior";
+              }
+              var dot = $('<div class="dot '+className+'"></div>')  // create html elements (the dots)
+              $("div#dotcontainer").append(dot)  // select the container, append is a jquery function that inserts a dot visually
+              dot.css({
+
+                top: rect.top+window.scrollY+3
+
+              }); // is semi colon needed?
+            }
+          }
+          drawDots();   // excuted once on load 
+          $( window ).resize(drawDots);   // if window is resized, escuted the functiont hat is draw dots
+
+
+        });
+
+</script>
+
+</head>
+
+<body>
+
+  <!-- body content here --> 
+  <div class="top-bar-container">
+  </div>
+  <div class="fixed">
+    <nav class="top-bar" data-topbar>
+      <ul class="title-area">
+        <li class="name">
+          <h1><a href="index.html"><img src="img/Logo_White.png" size: width="30px">&nbsp;&nbsp;Surveillance Stories</a></h1>
+        </li>
+        <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+
+      </ul>
+
+      <section class="top-bar-section">
+        <!-- Right Nav Section 
+        <ul class="right">
+          ...
+        </li>
+      <li class="active"><a href="#">Right Button Active</a></li>
+      <li class="has-dropdown">
+        <a href="#">Right Button Dropdown</a>
+        <ul class="dropdown">
+          <li><a href="#">First link in dropdown</a></li>
+        </ul>
+      </li>
+    </ul> -->
+
+    <!-- Left Nav Section -->
+    <ul class="left">
+      <li><a href="LearnAct.html">Learn &amp; Act</a></li>
+      <li><a href="TellYourStory.html">Tell Your Story</a>
+      </ul>
+    </section>
+
+  </nav>
+
+
+  <div class="row">
+    <div class="large-12 columns">
+      <div class="toptitle">
+        <h3><center>Tell Your Story</center></h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <center>
+    <div class="large-4 medium-4 small-4 columns">
+      <div class="white panel">
+        <img src="img/You.png" size: width="220px">
+      </div>
+    </div>
+  </center>
+
+  <div class="large-4 medium-4 small-4 columns">
+    <div class="white panel">
+      <h5>Headline</h5>
+      This is for you. The more stories SS has, the more people can understand how inter connected surveillance systems are. 
+      We can talk to you anonymously, your identity doesn't have to be known. 
+    </div>
+  </div>
+
+  <div class="large-4 medium-4 small-4 columns">
+    <div class="white panel">
+      <h5>Tell us your story</h5>
+      Give us a quick idea of what happened. We'll get back to you for an interview. 
+      <div class="row">
+        <div class="large-12 columns">
+          <label>.
+            <textarea placeholder="Where were you, what happened, how did you feel, what did you think?"></textarea>
+          </label>
+        </div>
+      </div>
+      <a href="index.html" class="button radius">Sumbit</a>
+
+      <br><br>
+      <h5>Or, send us an email</h5>
+      PGP Key and an encrypted email address (it's ready)
+    
+    </div>
+  </div>
+
+
+</div>
+
+
+
+<script src="js/foundation.min.js"></script>
+<script>
+  $(document).foundation();
+</script>
+
+
+</body>
+</html>
