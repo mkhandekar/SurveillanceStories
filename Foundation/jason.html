@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+<html class="no-js" lang="en" >
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Surveillance Stories</title>
+
+  <!-- If you are using CSS version, only link these 2 files, you may add app.css to use for your overrides if you like. -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/foundation.css">
+
+  <!-- If you are using the gem version, you need this only -->
+  
+
+  <script src="js/vendor/modernizr.js"></script>
+  <script src="js/vendor/jquery.js"></script>
+  
+  <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Alegreya+Sans:300,400,700,900,400italic,700italic,900italic,100italic,300italic' rel='stylesheet' type='text/css'>
+
+  <script>
+
+    $(document).ready(
+
+      function(){
+
+       $('body').click(function(e) {
+        $('div#annotationcontainer').html("");
+      });
+
+       $(".statement").click(function(e){ 
+           // filter , click listeners .. go get everything that is class .statement (which is really filter)  when it is clicked, call function (e) which is event == which can have mouse position ,et c  
+          var offset = $(this).attr('offset');  // when clicked on it loads offset which has % value
+          var kid = $(this).children('span.annotation');  
+          var newkid = kid.clone();
+          newkid.css({display: 'block'});   // html elements display, none, inline, block, block has most control using "position" absolute 
+          
+          $("div#annotationcontainer").html(newkid);
+          
+          var rect = this.getBoundingClientRect() // this means: refers to the context of the variable it is executing 
+
+          $("div#annotationcontainer").css({
+
+            top: rect.top+window.scrollY-50
+
+          });
+
+          e.stopPropagation();
+          
+        });
+
+          function drawDots() {  // 
+            $(".dot").remove();   // empty the canvas
+            var statements = $(".statement");     //fetch all statements
+
+            for (var i = 0; i < statements.length; i++) { // i is 0, immediately check the conditions,  
+              var statement = statements[i]   // firststatement is the variable name is getting statement 1 which is the 2nd highlight
+              var rect = statement.getBoundingClientRect() // 2nd statement is the 2nd highlight, calling a fucntion on that html element that returns the total size / distances of that hightlight  
+              if ($(statement).hasClass("system")){
+                className="system";
+              }
+              if ($(statement).hasClass("identity")){
+                className="identity";
+              }
+              if ($(statement).hasClass("behavior")){
+                className="behavior";
+              }
+              var dot = $('<div class="dot '+className+'"></div>')  // create html elements (the dots)
+              $("div#dotcontainer").append(dot)  // select the container, append is a jquery function that inserts a dot visually
+              dot.css({
+
+                top: rect.top+window.scrollY+3
+
+              }); // is semi colon needed?
+            }
+          }
+          drawDots();   // excuted once on load 
+          $( window ).resize(drawDots);   // if window is resized, escuted the functiont hat is draw dots
+
+
+        });
+
+</script>
+
+</head>
+
+<body>
+
+  <!-- body content here --> 
+  <div class="top-bar-container">
+  </div>
+  <div class="fixed">
+    <nav class="top-bar" data-topbar>
+      <ul class="title-area">
+        <li class="name">
+          <h1><a href="index.html"><img src="img/Logo_White.png" size: width="30px">&nbsp;&nbsp;Surveillance Stories</a></h1>
+        </li>
+        <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+
+      </ul>
+
+      <section class="top-bar-section">
+        <!-- Right Nav Section 
+        <ul class="right">
+          ...
+        </li>
+      <li class="active"><a href="#">Right Button Active</a></li>
+      <li class="has-dropdown">
+        <a href="#">Right Button Dropdown</a>
+        <ul class="dropdown">
+          <li><a href="#">First link in dropdown</a></li>
+        </ul>
+      </li>
+    </ul> -->
+
+    <!-- Left Nav Section -->
+    <ul class="left">
+      <li><a href="LearnAct.html">Learn &amp; Act</a></li>
+      <li><a href="TellYourStory.html">Tell Your Story</a>
+      </ul>
+    </section>
+
+  </nav>
+
+
+  <div class="row">
+    <div class="large-12 columns">
+      <div class="toptitle">
+        <h3>Dear America, I Saw You Naked</h3>
+        Jason Harrington · <a href="politico.com/magazine/story/2014/01/tsa-screener-confession-102912_full.html">original story</a>
+        
+        <div id="key">
+          <span data-tooltip class="has-tip tip-left" title="the people, norms" style="color:#D97D80">System</span>
+          <br>
+          <span data-tooltip class="has-tip tip-left" title="how the storyteller" style="color:#FAC466">Identity</span>
+          <br>
+          <span data-tooltip class="has-tip tip-left" title="ways of actin" style="color:#50BEFF">Behavior</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="rowstory">
+
+  <div id="dotcontainer"></div>
+  <div id="annotationcontainer">    
+  </div>
+
+  <div id="story">
+<p> 
+On Jan. 4, 2010, when my boss saw my letter to the editor in the New York Times, we had a little chat.
+</p>
+<p>
+It was rare for the federal security director at Chicago O’Hare to sit down with her floor-level Transportation Security Administration officers—it usually presaged a termination—and so I was nervous as I settled in across the desk from her. She was a woman in her forties with sharp blue eyes that seemed to size you up for placement in a spreadsheet. She held up a copy of the newspaper, open to the letters page. My contribution, under the headline “To Stop a Terrorist: No Lack of Ideas,” was circled in blue pen.
+</p>
+<p>
+One week earlier, on Christmas Day 2009, a man named Umar Farouk Abdulmutallab had tried to detonate 80 grams of a highly explosive powder while on Northwest Airlines Flight 253. He had smuggled the bomb aboard the plane in a pouch sewn into his underwear. It was a masterpiece of post-9/11 tragicomedy: Passengers tackled and restrained Abdulmutallab for the remainder of the flight, and he succeeded in burning nothing besides his own genitals.
+</p>
+<p>
+The TSA saw the near-miss as proof that aviation security could not be ensured without the installation of full-body scanners in every U.S. airport. But the agency’s many critics called its decision just another knee-jerk response to an attempted terrorist attack. I agreed, and wrote to the Times saying as much. My boss wasn’t happy about it.
+</p>
+<p>
+“The problem we have here is that you identified yourself as a TSA employee,” she said.
+</p>
+<p>
+They were words I had heard somewhere before. Suddenly, the admonishment from our annual conduct training flashed through my head—self-identifying as a government employee in a public forum may be grounds for termination.
+</p>
+<p>
+I was shocked. I had been sure the letter would fall under the aegis of public concern, but it looked as though my boss wanted to terminate me. I scrambled for something to say.
+</p>
+<p>
+“I thought the First Amendment applied here.”
+</p>
+<p>
+She leaned back in her chair, hands up, palms outfaced. Now she was on the defensive.
+</p>
+<p>
+“I’m not trying to tread upon your First Amendment rights,” she said. “All I’m saying is: Couldn’t you have run those First Amendment rights past the legal department first?”
+</p>
+<p>
+She dismissed me with the assurance that we would discuss the matter further at some point in the future.
+</p>
+<p>
+Most TSA officers I talked to told me they felt the agency’s day-to-day operations represented an abuse of public trust and funds.
+</p>
+<p>
+I never heard anything more about it during the next three years of my employment at the TSA, save for some grumbling from one upper-level manager (“What’s this I hear about you writing letters to the New York Times? You can’t do that here.”) It was the last time I would speak out as a government employee under my real name.
+</p>
+<p>
+But it was by no means the last time I would speak out.
+</p>
+<p>
+***
+</p>
+<p>
+My pained relationship with government security had started three years earlier. I had just returned to Chicago to finish my bachelor’s degree after a two-year stint in Florida. I needed a job to help pay my way through school, and the TSA’s call-back was the first one I received. It was just a temporary thing, I told myself—side income for a year or two as I worked toward a degree in creative writing. It wasn’t like a recession would come along and lock me into the job or anything.
+</p>
+<p>
+It was May 2007. I was living with a bohemian set on Chicago’s north side, a crowd ranging from Foucault-fixated college kids to middle-aged Bukowski-bred alcoholics. We drank and talked politics on the balcony in the evenings, pausing only to sneer at hipsters strumming back-porch Beatles sing-a-longs. By night, I took part in barbed criticism of U.S foreign policy; by day, I spent eight hours at O’Hare in a federal uniform, solemnly carrying out orders passed down from headquarters.
+</p>
+<p>
+I hated it from the beginning. It was a job that had me patting down the crotches of children, the elderly and even infants as part of the post-9/11 airport security show. I confiscated jars of homemade apple butter on the pretense that they could pose threats to national security. I was even required to confiscate nail clippers from airline pilots—the implied logic being that pilots could use the nail clippers to hijack the very planes they were flying.
+</p>
+<p>
+Once, in 2008, I had to confiscate a bottle of alcohol from a group of Marines coming home from Afghanistan. It was celebration champagne intended for one of the men in the group—a young, decorated soldier. He was in a wheelchair, both legs lost to an I.E.D., and it fell to me to tell this kid who would never walk again that his homecoming champagne had to be taken away in the name of national security.
+</p>
+<p>
+There I was, an aspiring satire writer, earnestly acting on orders straight out of Catch-22.
+</p>
+<p>
+I quickly discovered I was working for an agency whose morale was among the lowest in the U.S. government. In private, most TSA officers I talked to told me they felt the agency’s day-to-day operations represented an abuse of public trust and funds.
+</p>
+<p>
+Charges of racial profiling by the TSA made headlines every few months, and working from behind the scenes we knew what was prompting those claims. Until 2010 (not long after the TSA standard operating procedure manual was accidentially leaked to the public), all TSA officers worked with a secret list printed on small slips of paper that many of us taped to the back of our TSA badges for easy reference: the Selectee Passport List. It consisted of 12 nations that automatically triggered enhanced passenger screening. The training department drilled us on the selectee countries so regularly that I had memorized them, like a little poem:
+</p>
+<blockquote>Syria, Algeria, Afghanistan
+<br>Iraq, Iran, Yemen
+<br>and Cuba,
+<br>Lebanon-Libya, Somalia-Sudan
+<br>People’s Republic of North Korea.</blockquote>
+<p>
+People holding passports from the selectee countries were automatically pulled aside for full-body pat-downs and had their luggage examined with a fine-toothed comb. The selectee list was purely political, of course, with diplomacy playing its role as always: There was no Saudi Arabia or Pakistan on a list of states historically known to harbor, aid and abet terrorists. Besides, my co-workers at the airport didn’t know Algeria from a medical condition, we rarely came across Cubanos and no one’s ever seen a North Korean passport that didn’t include the words “Kim-Jong.” So it was mostly the Middle Easterners who got the special screening.
+</p>
+<p>
+Each day I had to look into the eyes of passengers in niqabs and thawbs undergoing full-body pat-downs, having been guilty of nothing besides holding passports from the wrong nations. As the son of a German-American mother and an African-American father who was born in the Jim Crow South, I can pass for Middle Eastern, so the glares directed at me felt particularly accusatory. The thought nagged at me that I was enabling the same government-sanctioned bigotry my father had fought so hard to escape.
+</p>
+<p>
+Most of us knew the directives were questionable, but orders were orders. And in practice, officers with common sense were able to cut corners on the most absurd rules, provided supervisors or managers weren’t looking.
+</p>
+<p>
+Then a man tried to destroy a plane with an underwear bomb, and everything changed.
+</p>
+<p>
+***
+</p>
+<p>
+We knew the full-body scanners didn’t work before they were even installed. Not long after the Underwear Bomber incident, all TSA officers at O’Hare were informed that training for the Rapiscan Systems full-body scanners would soon begin. The machines cost about $150,000 a pop.
+</p>
+<p>
+Our instructor was a balding middle-aged man who shrugged his shoulders after everything he said, as though in apology. At the conclusion of our crash course, one of the officers in our class asked him to tell us, off the record, what he really thought about the machines.
+</p>
+<p>
+“They’re shit,” he said, shrugging. He said we wouldn’t be able to distinguish plastic explosives from body fat and that guns were practically invisible if they were turned sideways in a pocket.
+</p>
+<p>
+We quickly found out the trainer was not kidding: Officers discovered that the machines were good at detecting just about everything besides cleverly hidden explosives and guns. The only thing more absurd than how poorly the full-body scanners performed was the incredible amount of time the machines wasted for everyone.
+</p>
+<p>
+It worked like this: The passengers stood between two enormous radiation sensors—each of the machines twice the size of a refrigerator—and assumed the position for seven seconds, feet spread shoulder-width apart, hands above the head, making Mickey Mouse ears. The policy was to have three officers on the checkpoint floor to coach passengers into position for the machine and administer pat-downs when necessary. The images were analyzed for threats in what was called the I.O. room, short for Image Operator, which locked from the inside.
+</p>
+<p>
+Many of the images we gawked at were of overweight people, their every fold and dimple on full awful display. 
+</p>
+<p>
+I.O. room duty quickly devolved into an unofficial break. It was the one place in the airport free of surveillance cameras, since the TSA had assured the public that no nude images of passengers would be stored on any recording device, closed circuit cameras included.
+</p>
+<p>
+The I.O. room at O’Hare had a bank of monitors, each with a disabled keyboard—which perfectly summed up my relationship with the TSA. I spent several hours each day looking at nude images of airline passengers with a keyboard that didn’t work, wishing I could be doing what I loved: writing. To pass the time, I phantom-typed passages on the dumb keys: Shakespeare and Nabokov and Baudelaire.
+</p>
+<p>
+The scans were grotesque, ghostly looking black-and-white images parading across our screens. I found comedy even in the I.O. room’s name. I had been brushing up on my Greek mythology for a writing project at the time, and couldn’t help but relate the I.O. room to the myth of Io and Zeus: Zeus shrouded the world with cloud cover to hide his relations with the beautiful Io from his jealous wife, Hera. But Hera suspected something was going on, and brought the affair to an end.
+</p>
+<p>
+***
+</p>
+<p>
+Most of my co-workers found humor in the I.O. room on a cruder level. Just as the long-suffering American public waiting on those security lines suspected, jokes about the passengers ran rampant among my TSA colleagues: Many of the images we gawked at were of overweight people, their every fold and dimple on full awful display. Piercings of every kind were visible. Women who’d had mastectomies were easy to discern—their chests showed up on our screens as dull, pixelated regions. Hernias appeared as bulging, blistery growths in the crotch area. Passengers were often caught off-guard by the X-Ray scan and so materialized on-screen in ridiculous, blurred poses—mouths agape, à la Edvard Munch. One of us in the I.O. room would occasionally identify a passenger as female, only to have the officers out on the checkpoint floor radio back that it was actually a man. All the old, crass stereotypes about race and genitalia size thrived on our secure government radio channels.
+</p>
+<p>
+Officers who were dating often conspired to get assigned to the I.O. room at the same time, where they analyzed the nude images with one eye apiece, at best.
+</p>
+<p>
+There were other types of bad behavior in the I.O. room—I personally witnessed quite a bit of fooling around, in every sense of the phrase. Officers who were dating often conspired to get assigned to the I.O. room at the same time, where they analyzed the nude images with one eye apiece, at best. Every now and then, a passenger would throw up two middle fingers during his or her scan, as though somehow aware of the transgressions going on.
+</p>
+<p>
+But the only people who hated the body-scanners more than the public were TSA employees themselves. Many of my co-workers felt uncomfortable even standing next to the radiation-emitting machines we were forcing members of the public to stand inside. Several told me they submitted formal requests for dosimeters, to measure their exposure to radiation. The agency’s stance was that dosimeters were not necessary—the radiation doses from the machines were perfectly acceptable, they told us. We would just have to take their word for it. When concerned passengers—usually pregnant women—asked how much radiation the machines emitted and whether they were safe, we were instructed by our superiors to assure them everything was fine.
+</p>
+<p>
+We were also ordered to tell the public that the machines were 100 percent effective, security-wise, in the event that any citizens caught wind of rumors to the contrary.
+</p>
+<p>
+Then, in March 2012, a blogger named Jonathan Corbett published a video on YouTube, titled “How to Get Anything Past the Full Body Scanners.” In it, Corbett revealed one of the greatest weaknesses of the scanners, known to everyone I talked to within the agency: A metal object hidden on the side of the body was invisible to an image operator. Corbett showed how a passenger could bring a pistol to the airport and get it past the full-body scanners and onto a plane.
+</p>
+<p>
+More than a million people saw the video within a few days of its being posted. Finally, the public had a hint of what my colleagues and I already knew. The scanners were useless. The TSA was compelling toddlers, pregnant women, cancer survivors—everyone—to stand inside radiation-emitting machines that didn’t work.
+</p>
+<p>
+Officially, the agency downplayed the Corbett video: “For obvious security reasons, we can’t discuss our technology’s detection capability in detail, however TSA conducts extensive testing of all screening technologies in the laboratory and at airports prior to rolling them out to the entire field,” an agency representative wrote on the TSA’s official blog. Behind closed doors, supervisors instructed us to begin patting down the sides of every fifth passenger as a clumsy workaround to the scanners’ embarrassing vulnerability.
+</p>
+<p>
+I remember one passenger coming through the checkpoint just after the video’s release. He declined to pass through the full-body scanner, choosing instead to receive a full-body pat-down. I asked him why he was opting out.
+</p>
+<p>
+“Because those things don’t work,” he said, “And I don’t want to be dosed with radiation by a thing that doesn’t work. Didn’t you see the video that just came out the other day?”
+</p>
+<p>
+“Yes, I did,” I said.
+</p>
+<p>
+“Well, what did you think about it?”
+</p>
+<p>
+I told him I wasn’t allowed to express that opinion while on duty as a federal officer, and he smiled.
+</p>
+<p>
+***
+</p>
+<p>
+By 2012, I’d had some experience with blogging—the run-of-the-mill personal blog that only mothers and best friends actually read—as well as contributing humor and memoir pieces to McSweeney’s Internet Tendency.
+
+The thought occurred to me: Why not publish a website by a TSA employee, for TSA employees, which would also serve as a platform to tell the public the truth about what was going on at the agency? And so early that year I created a blog on WordPress. I titled it “Taking Sense Away.” It was to be my forum for telling the public all that I had experienced in my five years of employment with the TSA. Across the top of the site, I used an illustration of body-scan images, front and back views, like we saw in the I.O. room.
+
+I registered the blog on a public computer at a FedEx office in Chicago, anticipating the possibility that someone might eventually be interested in the I.P. address from which the site was launched. At first, I told no one about the project and quietly sketched out articles; by mid-summer, I had enough material to fill out a year’s worth of blog posts. To be safe, I described myself as a “former” TSA employee, though I was still reporting for duty at O’Hare each day. But still I got cold feet when it was time to actually hit publish. For three months, I thought about it every time I walked past a quote painted on one of the walls at O’Hare: “Make no little plans; they have no magic to stir men’s blood and probably themselves will not be realized.”
+
+They were the words of the urban architect Daniel Burnham. I knew I could continue down the Path of the Little Plan—cling to my stable job with the TSA, carrying out absurd orders with my head bowed. And I knew that by publishing the blog I could very likely lose my government job and, at worst, even land myself on some sort of government watch list. But I felt an obligation to speak out, consequences be damned.
+
+One night in late October, on a computer at a UPS store, I published the first post, “All the Airport’s a Security Stage.” It went straight to the heart of what had prompted me to speak out in the first place: the inefficacy of the full-body scanners, the theatrical quality of nearly all airport security and the government’s shameful attempt to hide the scanners’ flaws from the public. “Working for the TSA,” I wrote, “has the feel of riding atop the back of a large, dopey dog fanatically chasing its tail clockwise for a while, then counterclockwise, and back again, ad infinitum.”
+
+I followed that post with several others detailing the day-to-day experiences of a TSA employee. I wrote about my awkward encounters on the job, like having to ask androgynous passengers whether they were male or female, and the absurd rules I had to follow, like having to confiscate snow globes during the holiday season even though we had taxpayer-funded equipment that could test the water inside. I saw the blog as a whistleblowing site with a sense of humor. From the moment I clicked publish, I was nervous about the blowback that was sure would follow.
+
+But we would also sometimes pull a passenger’s bag or give a pat down because he or she was rude. We always deployed the same explanation: “It’s just a random search.”
+
+Altogether, a total of nine people saw the site in its first six weeks.
+
+I began to worry that no one at all would read what I had written. I didn’t know which was worse: gaining an audience and losing my job for speaking out, or speaking out to a nonexistent audience and working at TSA for the rest of my life.
+
+Then one day—Dec. 18, 2012—I got home and discovered that a blog devoted to TSA-related news had linked to me, sending several dozen people my way. I was thrilled. One woman wrote in, asking what it was like in the room where we analyzed nude images of the public. I posted her question, along with an answer: Many TSA officers clowned around in the I.O. room, I wrote. I didn’t think much of it at the time.
+
+A couple days later another niche blog picked up my site, delivering a few dozen more visitors.
+Two days later, I logged in and saw that the graph for my blog’s web traffic had come to resemble the Burj Khalifa: 60,000 people had viewed it in the eight hours that I had been at work. I sat in front of my laptop until 5 a.m., transfixed, clicking refresh over and over, watching the visitors arrive in real time.
+
+I had gone viral.
+
+I barely ate. It was the feeling of being in love and being scared for one’s life, all at the same time. I spent each day wondering if my co-workers or bosses had seen the site. I came home one day to an e-mail from an ABC News reporter, requesting an interview and my real name, a request I ignored. Hours later, Jezebellinked to me. Then Fox News.
+
+One day, I received an e-mail from a man offering to loan me his apartment in Paris if I would give WikiLeaks every piece of insider information I had. At the time, I thought he was kidding.
+Within a week, an article appeared in the Los Angeles Times with a TSA spokesperson issuing an official government response, denying the claims of the anonymous blogger:
+
+ARE TSA OFFICERS LAUGHING AT YOU? AGENCY SAYS NO
+January 06, 2013 | By Hugo Martin
+
+The TSA made the statement in response to a blog post purportedly written by a former TSA screener on the blog Taking Sense Away … the author of the post said he had witnessed “a whole lot of officers laughing and clowning in regard to some of your nude images, dear passenger.”
+At work soon afterward, one of my colleagues told me: “Whoever it is, they’ll find him.”
+
+***
+
+At first I only used public computers—a FedEx office here, a public library there. Then, I began posting at home but masked my IP address via TOR, the same network that WikiLeaks uses to ensure its informants’ anonymity. Programs such as TOR make it difficult for investigators to track online activity back to a name—by no means impossible, but difficult. I quickly came to understand why people make mistakes and leave behind digital fingerprints, though: Shielding one’s identity is a cumbersome enterprise. I eventually surrendered all hope of total anonymity and began posting from home, unmasked.
+
+Paranoia gnawed at me. One of my jobs at O’Hare was to guard the airport exit lanes to make sure no one snuck into the secure side. I was also responsible for allowing credentialed law enforcement officers in. Several times a day, CIA and FBI agents would approach me at the exit lane, shiny shoes and all. After my site took off, I couldn’t shake the fear that they were approaching not to show me their badges and be waved through, but to confront me about my blog.
+My roommates were the only ones who knew. I came home from work each day to two scruffy, thirty-something guys. The three of us sat around the living room, our laptops open in front of us. They played online poker and “World of Warcraft;” I tracked my site’s web traffic. They read aloud the news sites that linked to my blog, while I watched the hits coming in from the very same outlets.
+We joked that it all looked like a scene from the movie Hackers. “Did you hack into the mainframe?” one of my roommates once asked, glancing over at my screen.
+
+One day, I received an e-mail from a man offering to loan me his apartment in Paris if I would give WikiLeaks every piece of insider information I had. At the time, I thought he was kidding.
+Looking back now, I believe the offer was no joke.
+
+***
+
+On Jan. 17, 2013, three weeks after my site went viral, the TSA announced it was canceling its contract with Rapiscan, the manufacturer of the full-body scanners, in favor of a new type of scanner that produced a generic outline of the body instead of graphic nudes.
+
+People wrote in to the blog suggesting that the announcement might have been prompted by the embarrassment my site brought upon the organization. If ever someone wanted to de-anonymize me, it was then. I felt it was in my interest to get out—soon.
+
+The only question was where to go.
+
+I didn’t know how I would ever make a decent living as a writer, but I also knew I didn’t want to spend the rest of my life as a mindless cog in a vast bureaucratic machine. On the advice of an editor friend, I had begun applying to graduate school creative writing programs in the weeks before I clicked publish on my site.
+
+I feared I wouldn’t be accepted into any of the seven programs to which I’d applied—and dreaded being stranded in airport purgatory. But I was lucky: The first acceptance came in January, with an offer of a full scholarship. Several more followed.
+
+In flying to visit universities, I found myself checking my airline ticket as soon as it was printed, praying I hadn’t been branded with the SSSS stamp that I knew all too well—the mark of a passenger who has been singled out as a potential threat to national security and designated for special screening. But the selectee mark never did appear.
+
+As a writer, the only thing of value that I could glean from my time at the TSA was the story of it all—the sheer absurdity of working for one of America’s most despised federal agencies. In the six months that I secretly blogged as a TSA employee, I did my best to record every notable piece of stupidity TSA and O’Hare had to offer.
+
+There was “The Things They Ran Through the X-Ray,” a post that detailed the craziest items I had seen put through the X-Ray belt at O’Hare: dildos, puppies, kittens. Even a real live TSA officer: In 2009, one of my friends had run her male colleague through a carry-on X-Ray machine. (It was a slow night.) When management happened upon video footage of the episode, they were both fired.
+
+There was also “No, You Don’t Know What It Is,” a post revealing that the enhanced screening you receive is often just as mystifying to the TSA officer administering it as it is to the traveler. “Random” security “plays” were passed down from headquarters every day, or ordered by our supervisors. The enhanced screening was also triggered by SSSS stamps, which could show up on passengers’ boarding passes for any number of reasons, often reasons we would never know. But we would also sometimes pull a passenger’s bag or give a pat down because he or she was rude. We always deployed the same explanation: “It’s just a random search.”
+
+Then there was the infamous “guyspeak” in my “Insider’s TSA Dictionary.” One of the first terms I learned from fellow male TSA officers at O’Hare was “Hotel Papa,” code language for an attractive female passenger—“Hotel” standing for “hot,” and “Papa” for, well, use your imagination.
+
+I hinted several times on the blog that a determined terrorist’s best bet for defeating airport security would be to apply for a job with the TSA and simply become part of the security system itself. That assertion stemmed from personal experience. A fellow officer once returned to O’Hare from a trip to TSA headquarters and confessed that he had run into some complications: Someone realized that his background check had never been processed in the four years he had been an employee. He could have been anyone, for all TSA knew—a murderer, terrorist, rapist. The agency had to rush to get his background investigated. Who knows how many similar cases there were, and are, at airports around the nation.
+
+***
+
+As much as I wished I could maintain my behind-the-scenes view of the security circus, my heart was not heavy on the May afternoon when I went to turn in my uniform and tell the TSA I wouldn’t be coming back.
+
+“You’ll have to sign all these papers,” the woman in HR told me, barely glancing my way as she handed me a clipboard with a packet of documents. She was accustomed to people coming in and resigning unexpectedly; it seemed as though everyone wanted out of the TSA.
+
+“But as for your uniforms,” she said, “You’ll be giving those to your exit interviewer.”
+
+I was conflicted about whether to go to the interview. I could simply refuse, claiming some sort of emergency—drop my uniforms off in a cardboard box out in front of headquarters, like an unwanted baby. My roommates told me I would be stupid to go. After all, if some government official was going to sit me down for questioning about my involvement with an anonymous whistleblower site, the exit interview would be the place it would happen.
+
+I decided to show. I had committed no crime in daring to speak out; I had only provided information the public had a right to know. As I saw it, $40 million in taxpayer dollars had been wasted on ineffective anti-terrorism security measures at the expense of the public’s health, privacy and dignity. If asked during my exit interview whether I knew anything about a website called “Taking Sense Away,” I decided I would tell the truth.
+
+But the exit interview turned out to be nothing more than a pleasant conversation with a woman in admin. There was no last-minute grilling by a grim-faced government suit. It was just “Jane,” the exit interview girl who had moved from Georgia to Chicago, Southern hospitality intact. The interview consisted of Jane reading from a checklist of TSA uniform pieces I was on record as owning, and me, for the most part, apologizing for having lost many of them years ago.
+
+Jane smiled, assuring me it was fine. She shook my hand, wished me luck in my new role as a grad student, and that was it. I left headquarters, officially relieved of my federal post.
+
+Jason Edward Harrington is a writer and is working on a novel based on his time at the TSA. Follow him on Twitter @Jas0nHarringt0n.
+
+
+
+  </div>
+
+ <div class="row">
+            <div class="large-12 columns">
+              <div class="white panel">
+                <center>This is <a href="https://mkhandekar.com">Meghana Khandekar</a>'s thesis while at <a href="http://interactiondesign.sva.edu/">SVA IxD</a>.
+                <br>
+                <a href="https://twitter.com/mkhandekar">@mkhandekar</a> · <a href="http://cargocollective.com/surveillancestories/">Process</a></center></p>
+              </div>
+            </div>
+          </div>
+
+    <script src="js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+    </script>
+
+
+</body>
+</html>
