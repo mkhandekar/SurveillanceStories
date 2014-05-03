@@ -15,11 +15,10 @@
   
 
   <script src="js/vendor/modernizr.js"></script>
-
+  <script src="js/vendor/jquery.js"></script>
+  
   <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
-
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
   <script>
 
@@ -28,7 +27,7 @@
       function(){
 
        $('body').click(function(e) {
-        $('div#highlight').html("");
+        $('div#annotationcontainer').html("");
       });
 
        $(".statement").click(function(e){ 
@@ -38,11 +37,11 @@
           var newkid = kid.clone();
           newkid.css({display: 'block'});   // html elements display, none, inline, block, block has most control using "position" absolute 
           
-          $("div#highlight").html(newkid);
+          $("div#annotationcontainer").html(newkid);
           
           var rect = this.getBoundingClientRect() // this means: refers to the context of the variable it is executing 
 
-          $("div#highlight").css({
+          $("div#annotationcontainer").css({
 
             top: rect.top+window.scrollY-50
 
@@ -89,8 +88,9 @@
 
 <body>
 
-  <!-- body content here -->
-
+  <!-- body content here --> 
+  <div class="top-bar-container">
+  </div>
   <div class="fixed">
     <nav class="top-bar" data-topbar>
       <ul class="title-area">
@@ -113,8 +113,8 @@
         <ul class="dropdown">
           <li><a href="#">First link in dropdown</a></li>
         </ul>
-      </li>-->
-    </ul> 
+      </li>
+    </ul> -->
 
     <!-- Left Nav Section -->
     <ul class="left">
@@ -125,22 +125,30 @@
 
   </nav>
 
+
   <div class="row">
     <div class="large-12 columns">
       <div class="toptitle">
-        <h3>Story Title</h3>
+        <h3>Story Title Story Title Story Title</h3>
         and author
-        <span data-tooltip class="has-tip" title="the people, norms and laws in a system">System</span>&nbsp;&nbsp;<span data-tooltip class="has-tip" title="how the storyteller perceives themselves &amp; how the system perceives the storyteller">Identity</span>&nbsp;&nbsp;<span data-tooltip class="has-tip" title="ways of acting based on a set of values">Behavior</span>
+        
+        <div id="key">
+        <span data-tooltip class="has-tip tip-left" title="the people, norms">System</span>
+        <br>
+        <span data-tooltip class="has-tip tip-left" title="how the storyteller">Identity</span>
+        <br>
+        <span data-tooltip class="has-tip tip-left" title="ways of actin">Behavior</span>
+        </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 
 <div class="rowstory">
 
   <div id="dotcontainer"></div>
-  <div id="highlight">    
+  <div id="annotationcontainer">    
   </div>
 
   <div id="story">
@@ -240,7 +248,6 @@
 
     </div>
 
-    <script src="js/vendor/jquery.js"></script>
     <script src="js/foundation.min.js"></script>
     <script>
       $(document).foundation();
