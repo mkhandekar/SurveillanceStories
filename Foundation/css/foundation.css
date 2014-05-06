@@ -52,6 +52,7 @@ meta.foundation-version {
 
 
   body {
+    background-color: #f6f5f8;
     margin:0em;
     padding: 0;
     margin: 0;
@@ -88,7 +89,7 @@ meta.foundation-version {
     padding:1em;
     line-height: 175%;
     border-radius: 3px;
-    outline: 15px solid #fff;
+    outline: 16px solid #f6f5f8;
   }
 
   #story span.statement {
@@ -154,49 +155,49 @@ meta.foundation-version {
   /* ANNOTATION BOXES */
 
   span.annotation.system {
-    background:#eef2fa; 
+    background:#fff; 
     color:#555555;
     font-size:13pt;
     line-height: 150%;
     margin-bottom: 1.25rem;
     border-top-style: solid;
-    border-top-width: 5px;
+    border-top-width: 6px;
     border-color: #D97D80;
     border-width: 100%;
   }
 
   span.annotation.system:hover {
-  background:#eef2fa;
+  background:#fff;
 }
 
   span.annotation.identity {
-    background:#eef2fa; 
+    background:#fff; 
     color:#555555;
     font-size:12pt;
     line-height: 150%;
     border-top-style: solid;
-    border-top-width: 5px;
+    border-top-width: 6px;
     border-color: #FAC466;
     border-width: 100%;
 
   }
   span.annotation.identity:hover {
-    background:#eef2fa;
+    background:#fff;
   }
 
   span.annotation.behavior {
-    background:#eef2fa; 
+    background:#fff; 
     color:#555555;
     font-size:12pt;
     line-height: 150%;
     border-top-style: solid;
-    border-top-width: 5px;
+    border-top-width: 6px;
     border-color: #50BEFF;
     border-width: 100%;
   }
 
   span.annotation.behavior:hover {
-  background:#eef2fa;
+  background:#fff;
 }
 
   /* ANNOTATION LINKS */
@@ -313,7 +314,7 @@ meta.foundation-version {
                                 margin-right: auto;
                                 margin-top: 0;
                                 margin-bottom: 0;
-                                max-width: 50rem;    /* 62.5 rem = normal */
+                                max-width: 47rem;    /* 62.5 rem = normal */
                               }
 
                                 div#story {
@@ -2206,14 +2207,14 @@ meta.foundation-version {
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     border-radius: 3px; }
 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     .toptitle {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      background: #f6f5f8;
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       position: relative;
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       width: 100%;
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       border-bottom-style: solid;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      border-bottom-width: 3px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      border-bottom-width: 6px;
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       border-color: #595D9B;
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       margin-bottom: 1.25rem;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      padding: 1.25rem;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      background: #fff; }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      padding: 1.25rem; }
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       .panel > :first-child {
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         margin-top: 0; }
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         .panel > :last-child {
@@ -3111,8 +3112,9 @@ meta.foundation-version {
                                                                                                                                                                                                                                                                                                                                                                       /* Default paragraph styles */
                                                                                                                                                                                                                                                                                                                                                                       p {
                                                                                                                                                                                                                                                                                                                                                                         font-weight: normal;
-                                                                                                                                                                                                                                                                                                                                                                        font-size: 1.2rem;
-                                                                                                                                                                                                                                                                                                                                                                        margin-bottom: 1.2rem;
+                                                                                                                                                                                                                                                                                                                                                                        font-size: 1.3rem;
+                                                                                                                                                                                                                                                                                                                                                                        color: #555555;
+                                                                                                                                                                                                                                                                                                                                                                        margin-bottom: 1.8rem;
                                                                                                                                                                                                                                                                                                                                                                         text-rendering: optimizeLegibility; }
                                                                                                                                                                                                                                                                                                                                                                         p.lead {
                                                                                                                                                                                                                                                                                                                                                                           font-size: 1.21875rem;
@@ -3570,9 +3572,10 @@ meta.foundation-version {
                                                                                                                                                             /*  border-bottom: dotted 1px #cccccc; 
                                                                                                                                                             cursor: help; */
                                                                                                                                                             font-family: "Montserrat";
-                                                                                                                                                            font-weight: bold;
-                                                                                                                                                            font-size: 12px;
+                                                                                                                                                            font-weight: 700;
+                                                                                                                                                            font-size: 10pt;
                                                                                                                                                             line-height: 150%;
+                                                                                                                                                            letter-spacing: .1pt;
                                                                                                                                                             color: #333333; }
                                                                                                                                                             .has-tip:hover, .has-tip:focus {
                                                                                                                                                               /*  border-bottom: dotted 1px #003f54; */
