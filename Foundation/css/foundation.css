@@ -74,7 +74,7 @@ meta.foundation-version {
     position:absolute; 
     margin-left:80px;
     height:auto;
-    width:300px;
+    width:400px;
   }
 
 /* THIS IS THE THING THAT POPS UP*/
@@ -88,7 +88,7 @@ meta.foundation-version {
     padding:1em;
     line-height: 175%;
     border-radius: 3px;
-    outline: 10px solid #fff;
+    outline: 15px solid #fff;
   }
 
   #story span.statement {
@@ -117,33 +117,111 @@ meta.foundation-version {
     background:#50BEFF;
   }   
 
-  span.annotation span.headline {
+
+  /* ANNOTATION HEADLINES */
+  
+
+  span.annotation.system span.headline {
+    display:inline-block;
+    padding-bottom: 1em;
     font-family: 'Montserrat';
+    color:#222222;
     font-weight: 700;
-    line-height: 100%;
-    font-size:13pt;
+    line-height: 150%;
+    font-size:15pt;
   }
+
+  span.annotation.identity span.headline {
+  display:inline-block;
+  padding-bottom: 1em;
+  font-family: 'Montserrat';
+  color:#222222;
+  font-weight: 700;
+  line-height: 150%;
+  font-size:15pt;
+}
+
+  span.annotation.behavior span.headline {
+  display:inline-block;
+  padding-bottom: 1em;
+  font-family: 'Montserrat';
+  color:#222222;
+  font-weight: 700;
+  line-height: 150%;
+  font-size:15pt;
+}
+
+  /* ANNOTATION BOXES */
 
   span.annotation.system {
-    background:#D97D80; 
-    color:white;
-    font-size:11pt;
+    background:#eef2fa; 
+    color:#555555;
+    font-size:13pt;
     line-height: 150%;
+    margin-bottom: 1.25rem;
+    border-top-style: solid;
+    border-top-width: 5px;
+    border-color: #D97D80;
+    border-width: 100%;
   }
 
+  span.annotation.system:hover {
+  background:#eef2fa;
+}
+
   span.annotation.identity {
-    background:#FAC466; 
-    color:white;
-    font-size:11pt;
+    background:#eef2fa; 
+    color:#555555;
+    font-size:12pt;
     line-height: 150%;
+    border-top-style: solid;
+    border-top-width: 5px;
+    border-color: #FAC466;
+    border-width: 100%;
+
+  }
+  span.annotation.identity:hover {
+    background:#eef2fa;
   }
 
   span.annotation.behavior {
-    background:#50BEFF; 
-    color:white;
-    font-size:11pt;
+    background:#eef2fa; 
+    color:#555555;
+    font-size:12pt;
     line-height: 150%;
+    border-top-style: solid;
+    border-top-width: 5px;
+    border-color: #50BEFF;
+    border-width: 100%;
   }
+
+  span.annotation.behavior:hover {
+  background:#eef2fa;
+}
+
+  /* ANNOTATION LINKS */
+
+    span.annotation span.annlink {
+    display:inline-block;
+    padding-top: 1em;
+    font-family: 'Montserrat';
+    font-weight: 500;
+    color:#dde4ee;
+    font-size:10pt;
+    line-height: 150%;
+
+  }
+
+/*
+.annotation a {
+  color: #dde4ee;
+  text-decoration: none;
+  line-height: inherit; }
+.annotation a:hover, a:focus {
+    color: #ffffff; 
+  }
+*/
+
 
   /* HIGHLIGHT COLOR AND HOVERS FILTERS */
 
@@ -241,7 +319,7 @@ meta.foundation-version {
                                 div#story {
 
                                 font-weight: 300;
-                                line-height: 200%;
+                                line-height: 230%;
                                   margin-top:10px;
                                   margin-left:100px;
                                   margin-right:50px;
@@ -1520,8 +1598,8 @@ meta.foundation-version {
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               color: white;
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               padding: 12px 0 12px 0;
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               padding-left: 15px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              font-size: 0.8125rem;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              font-family: "Alegreya Sans", "Helvetica", Helvetica, Arial, sans-serif;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              font-size: 1rem;
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               font-weight: normal;
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               text-transform: none;
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               background: #595D9B; }
@@ -3033,8 +3111,8 @@ meta.foundation-version {
                                                                                                                                                                                                                                                                                                                                                                       /* Default paragraph styles */
                                                                                                                                                                                                                                                                                                                                                                       p {
                                                                                                                                                                                                                                                                                                                                                                         font-weight: normal;
-                                                                                                                                                                                                                                                                                                                                                                        font-size: 1rem;
-                                                                                                                                                                                                                                                                                                                                                                        margin-bottom: 1.25rem;
+                                                                                                                                                                                                                                                                                                                                                                        font-size: 1.2rem;
+                                                                                                                                                                                                                                                                                                                                                                        margin-bottom: 1.2rem;
                                                                                                                                                                                                                                                                                                                                                                         text-rendering: optimizeLegibility; }
                                                                                                                                                                                                                                                                                                                                                                         p.lead {
                                                                                                                                                                                                                                                                                                                                                                           font-size: 1.21875rem;
